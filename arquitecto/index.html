@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manu De la Barra — Arquitecto &amp; Docente</title>
+<meta name="description" content="Manu De la Barra — arquitecto computacional y docente de herramientas avanzadas de diseño para arquitectura. Lima, Perú.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+    :root{
+        --paper:#f4f2ec;
+        --paper-2:#eae6db;
+        --ink:#1a1917;
+        --ink-soft:#56514a;
+        --ink-faint:#8a847a;
+        --accent:#9a5b2d;
+        --line:rgba(26,25,23,0.12);
+        --line-soft:rgba(26,25,23,0.07);
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+        font-family:'Spectral',Georgia,serif;
+        font-weight:300;
+        background:var(--paper);
+        color:var(--ink-soft);
+        line-height:1.7;
+        -webkit-font-smoothing:antialiased;
+    }
+    ::selection{background:var(--ink);color:var(--paper);}
+    a{color:inherit;}
+    :focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+
+    .container{max-width:1060px;margin:0 auto;padding:0 32px;}
+
+    h1,h2,h3,.display{
+        font-family:'Space Grotesk',sans-serif;
+        font-weight:500;
+        letter-spacing:-0.01em;
+        color:var(--ink);
+    }
+    .mono{font-family:'IBM Plex Mono',monospace;letter-spacing:0.04em;}
+
+    .eyebrow{
+        font-family:'IBM Plex Mono',monospace;
+        font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;
+        color:var(--accent);display:flex;align-items:center;gap:10px;
+    }
+    .eyebrow::before{content:'';width:20px;height:1px;background:var(--accent);}
+
+    /* Nav */
+    .nav{
+        position:fixed;top:0;left:0;right:0;z-index:100;
+        background:rgba(244,242,236,0.86);backdrop-filter:blur(8px);
+        border-bottom:1px solid var(--line-soft);
+    }
+    .nav .container{display:flex;align-items:center;justify-content:space-between;height:60px;gap:1rem;}
+    .nav-brand{font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:0.9rem;color:var(--ink);flex-shrink:0;}
+    .nav-brand a{text-decoration:none;}
+    .nav-right{display:flex;align-items:center;gap:1.6rem;}
+    .nav ul{list-style:none;display:flex;gap:1.9rem;}
+    .nav a.nav-link{
+        font-family:'IBM Plex Mono',monospace;font-size:0.76rem;letter-spacing:0.05em;
+        text-transform:uppercase;color:var(--ink-faint);text-decoration:none;
+        transition:color 0.25s ease;position:relative;padding-bottom:4px;white-space:nowrap;
+    }
+    .nav a.nav-link::after{content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--accent);transition:width 0.25s ease;}
+    .nav a.nav-link:hover,.nav a.nav-link.active{color:var(--ink);}
+    .nav a.nav-link:hover::after,.nav a.nav-link.active::after{width:100%;}
+    .nav-switch{
+        font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.03em;
+        color:var(--ink);text-decoration:none;border:1px solid var(--line);
+        padding:0.4rem 0.7rem;transition:all 0.2s ease;white-space:nowrap;
+    }
+    .nav-switch:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+    .nav-toggle{display:none;}
+
+    /* Hero */
+    .hero{min-height:94vh;display:flex;flex-direction:column;justify-content:center;position:relative;padding-top:60px;overflow:hidden;}
+    .hero-weave{
+        position:absolute;inset:0;z-index:0;opacity:0.55;
+        background-image:
+            repeating-linear-gradient(90deg,rgba(26,25,23,0.05) 0 1px,transparent 1px 52px),
+            repeating-linear-gradient(0deg,rgba(26,25,23,0.05) 0 1px,transparent 1px 52px);
+    }
+    .hero-content{position:relative;z-index:1;}
+    .hero .eyebrow{margin-bottom:1.6rem;}
+    .hero h1{font-size:clamp(2.6rem,7vw,5.4rem);line-height:0.98;color:var(--ink);font-weight:500;margin-bottom:1.4rem;}
+    .hero-rule{width:40px;height:2px;background:var(--ink);margin:0 0 1.5rem;}
+    .hero-roles{font-family:'IBM Plex Mono',monospace;font-size:0.92rem;color:var(--ink-faint);margin-bottom:2.2rem;}
+    .hero-lead{max-width:540px;font-size:1.08rem;color:var(--ink-soft);}
+    .scroll-cue{position:absolute;bottom:2.4rem;left:32px;z-index:1;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--ink-faint);letter-spacing:0.12em;display:flex;align-items:center;gap:10px;}
+    .scroll-cue::after{content:'';width:1px;height:32px;background:linear-gradient(var(--ink-faint),transparent);}
+
+    /* Sections */
+    .section{padding:6.5rem 0;position:relative;}
+    .section--alt{background:var(--paper-2);}
+    .section-head{margin-bottom:3rem;}
+    .section-title{font-size:clamp(1.8rem,3vw,2.4rem);margin-top:0.5rem;}
+
+    /* About */
+    .about-grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:4rem;align-items:start;}
+    .about-text p{color:var(--ink-soft);margin-bottom:1.2rem;font-size:1.02rem;}
+    .about-text p:last-child{margin-bottom:0;}
+    .skills-group{margin-bottom:1.6rem;}
+    .skills-group:last-child{margin-bottom:0;}
+    .skills-group h4{font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.7rem;font-weight:500;}
+    .skills-list{display:flex;flex-wrap:wrap;gap:0.45rem;}
+    .skill-tag{font-family:'IBM Plex Mono',monospace;font-size:0.76rem;color:var(--ink);background:transparent;border:1px solid var(--line);padding:0.38rem 0.7rem;}
+
+    /* Projects (featured) */
+    .proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);}
+    .proj{background:var(--paper);padding:2.2rem;display:flex;flex-direction:column;transition:background 0.3s ease;}
+    .proj:hover{background:var(--paper-2);}
+    .proj .mono{font-size:0.68rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;}
+    .proj h3{font-size:1.2rem;margin-bottom:0.6rem;}
+    .proj p{color:var(--ink-faint);font-size:0.93rem;flex-grow:1;margin-bottom:1.2rem;}
+    .proj-link{font-family:'IBM Plex Mono',monospace;font-size:0.76rem;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;width:fit-content;padding-bottom:2px;border-bottom:1px solid var(--accent);transition:gap 0.25s ease;}
+    .proj-link:hover{gap:0.75rem;}
+
+    /* Timeline */
+    .timeline{position:relative;margin-top:1rem;}
+    .timeline::before{content:'';position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:var(--line);}
+    .timeline-item{position:relative;padding-left:52px;padding-bottom:2.8rem;}
+    .timeline-item:last-child{padding-bottom:0;}
+    .timeline-item::before{content:'';position:absolute;left:0;top:7px;width:11px;height:11px;background:var(--paper);border:1.5px solid var(--ink);transform:rotate(45deg);}
+    .timeline-item.is-current::before{background:var(--accent);border-color:var(--accent);}
+    .timeline-date{font-family:'IBM Plex Mono',monospace;font-size:0.76rem;color:var(--accent);margin-bottom:0.4rem;}
+    .timeline-title{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:500;color:var(--ink);margin-bottom:0.25rem;}
+    .timeline-company{font-style:italic;color:var(--ink-faint);margin-bottom:0.7rem;font-size:0.93rem;}
+    .timeline-item p:not(.timeline-company){color:var(--ink-soft);font-size:0.94rem;max-width:620px;}
+
+    /* Contact */
+    .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line);}
+    .contact-item{padding:2.2rem 1rem;text-align:center;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transition:background 0.3s ease;}
+    .contact-item:hover{background:var(--paper-2);}
+    .contact-item h4{font-family:'IBM Plex Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem;}
+    .contact-item p{color:var(--ink);font-family:'Space Grotesk',sans-serif;font-size:0.92rem;}
+    .contact-item a{text-decoration:none;}
+
+    /* Footer */
+    .footer{padding:2.6rem 0;text-align:center;border-top:1px solid var(--line-soft);}
+    .footer p{font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.05em;color:var(--ink-faint);}
+    .footer p:first-child{margin-bottom:0.4rem;color:var(--ink-soft);}
+    .footer a{color:var(--accent);text-decoration:none;}
+
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity 0.7s ease,transform 0.7s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+
+    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.reveal{opacity:1;transform:none;transition:none;}*{transition-duration:0.01ms!important;}}
+
+    @media (max-width:820px){
+        .about-grid{grid-template-columns:1fr;gap:2.4rem;}
+        .nav-right{gap:0.8rem;}
+        .nav ul{position:fixed;top:60px;left:0;right:0;flex-direction:column;background:var(--paper);border-bottom:1px solid var(--line);padding:1rem 32px 1.5rem;gap:1rem;display:none;}
+        .nav ul.open{display:flex;}
+        .nav-toggle{display:block;background:none;border:1px solid var(--line);color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.45rem 0.65rem;cursor:pointer;}
+    }
+    @media (max-width:560px){.container{padding:0 20px;}.section{padding:4.2rem 0;}.timeline-item{padding-left:44px;}.contact-grid{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+    <div class="container">
+        <span class="nav-brand"><a href="../">MDLB</a></span>
+        <div class="nav-right">
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navList">Menú</button>
+            <ul id="navList">
+                <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li><a href="#perfil" class="nav-link">Perfil</a></li>
+                <li><a href="#docencia" class="nav-link">Docencia</a></li>
+                <li><a href="#trayectoria" class="nav-link">Trayectoria</a></li>
+                <li><a href="#contacto" class="nav-link">Contacto</a></li>
+            </ul>
+            <a href="../artista/" class="nav-switch">Ver faceta artista →</a>
+        </div>
+    </div>
+</nav>
+
+<section id="inicio" class="hero">
+    <div class="hero-weave" aria-hidden="true"></div>
+    <div class="container hero-content">
+        <p class="eyebrow">Arquitecto · Docente — Lima, Perú</p>
+        <h1>Manu<br>De la Barra</h1>
+        <div class="hero-rule"></div>
+        <p class="hero-roles mono">Arquitectura computacional · Diseño paramétrico y generativo · IA · Docencia</p>
+        <p class="hero-lead">Arquitecto formado entre la práctica profesional y la investigación computacional. Diseño, visualización y enseñanza de las herramientas que están redefiniendo el proyecto arquitectónico.</p>
+    </div>
+    <span class="scroll-cue mono">DESLIZA</span>
+</section>
+
+<section id="perfil" class="section">
+    <div class="container">
+        <div class="section-head reveal">
+            <p class="eyebrow">01 — Perfil</p>
+            <h2 class="section-title">Sobre mí</h2>
+        </div>
+        <div class="about-grid">
+            <div class="about-text reveal">
+                <p>Arquitecto con una práctica que une el proyecto construido y el diseño computacional. Mi trabajo integra diseño paramétrico y generativo, visualización arquitectónica avanzada y flujos asistidos por inteligencia artificial.</p>
+                <p>A lo largo de más de quince años he desarrollado proyectos en estudios de arquitectura en Lima y en firmas internacionales, cubriendo desde el diseño y la documentación técnica hasta la visualización fotorrealista y la producción virtual.</p>
+                <p>Paralelamente ejerzo la docencia, enseñando las herramientas de diseño avanzadas —paramétricas, generativas, de IA y realidad extendida— que hoy transforman la disciplina. Mi interés investigativo conecta los sistemas computacionales con la cultura material andina entendida como lógica de diseño.</p>
+            </div>
+            <div class="reveal">
+                <div class="skills-group">
+                    <h4>Diseño &amp; arquitectura</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Diseño arquitectónico</span>
+                        <span class="skill-tag">Diseño paramétrico</span>
+                        <span class="skill-tag">Diseño generativo</span>
+                        <span class="skill-tag">Optimización estructural</span>
+                    </div>
+                </div>
+                <div class="skills-group">
+                    <h4>Visualización</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Archviz</span>
+                        <span class="skill-tag">Unreal Engine</span>
+                        <span class="skill-tag">CGI</span>
+                        <span class="skill-tag">Producción virtual</span>
+                    </div>
+                </div>
+                <div class="skills-group">
+                    <h4>Cómputo &amp; IA</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">IA para arquitectura</span>
+                        <span class="skill-tag">Grasshopper / Dynamo</span>
+                        <span class="skill-tag">ComfyUI</span>
+                        <span class="skill-tag">XR</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="docencia" class="section section--alt">
+    <div class="container">
+        <div class="section-head reveal">
+            <p class="eyebrow">02 — Docencia</p>
+            <h2 class="section-title">Enseñanza &amp; facilitación</h2>
+        </div>
+        <div class="proj-grid reveal">
+            <div class="proj">
+                <span class="mono">MALI · 2026–2027</span>
+                <h3>Herramientas de diseño avanzadas para arquitectura</h3>
+                <p>Docencia online en el Museo de Arte de Lima del Módulo 4 —diseño paramétrico, generativo, IA y XR— y del Módulo 3, "IA para arquitectos". Diseño de sílabo, materiales y sistema de evaluación propios.</p>
+            </div>
+            <div class="proj">
+                <span class="mono">Acelera / Habitat · 2026</span>
+                <h3>IA generativa y productividad</h3>
+                <p>Facilitación de un programa de IA y productividad para equipos de Habitat for Humanity a través de Acelera Education, con casos aplicados a proyectos de vivienda social.</p>
+            </div>
+            <div class="proj">
+                <span class="mono">FRICKSIONE · Desde 2013</span>
+                <h3>ArchSuite &amp; método propio</h3>
+                <p>Desarrollo de herramientas computacionales para arquitectura (ArchGraph, ArchForma, ArchClima) y de una metodología de diseño que fundamenta buena parte del material docente.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="trayectoria" class="section">
+    <div class="container">
+        <div class="section-head reveal">
+            <p class="eyebrow">03 — Trayectoria</p>
+            <h2 class="section-title">Experiencia profesional</h2>
+        </div>
+        <div class="timeline reveal">
+            <div class="timeline-item is-current">
+                <div class="timeline-date">Mayo 2026 — Marzo 2027</div>
+                <div class="timeline-title">Docente de módulos avanzados de arquitectura</div>
+                <div class="timeline-company">MALI — Museo de Arte de Lima</div>
+                <p>Docencia online del Módulo 4 "Herramientas de diseño avanzadas para arquitectura" y del Módulo 3 "IA para arquitectos".</p>
+            </div>
+            <div class="timeline-item is-current">
+                <div class="timeline-date">2026 — Presente</div>
+                <div class="timeline-title">Facilitador de programas de IA y productividad</div>
+                <div class="timeline-company">Acelera Education / Habitat for Humanity</div>
+                <p>Programa "IA generativa y productividad" con casos aplicados a vivienda social.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2020 — Presente</div>
+                <div class="timeline-title">Especialista en VFX y producción virtual</div>
+                <div class="timeline-company">Freelance / múltiples estudios</div>
+                <p>Efectos visuales, CGI y producción virtual para proyectos arquitectónicos y de entretenimiento. Unreal Engine para archviz y render en tiempo real.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2015 — Presente</div>
+                <div class="timeline-title">Especialista en Archviz &amp; CGI</div>
+                <div class="timeline-company">Chávez &amp; De la Barra Arquitectos / Freelance</div>
+                <p>Visualizaciones arquitectónicas fotorrealistas, renders de alta calidad y presentaciones CGI para clientes.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2013 — 2015</div>
+                <div class="timeline-title">Arquitecto junior</div>
+                <div class="timeline-company">Arquitectonica International Corporation, Lima</div>
+                <p>Desarrollo de proyectos de gran escala, documentación técnica, modelado 3D y coordinación multidisciplinaria.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2012 — Presente</div>
+                <div class="timeline-title">Diseño y desarrollo de proyectos</div>
+                <div class="timeline-company">Chávez &amp; De la Barra Arquitectos, Lima</div>
+                <p>Estudio familiar. Diseño arquitectónico, planos, paisajismo, seguridad en obra y consultoría normativa.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2009 — 2012</div>
+                <div class="timeline-title">Gerencia y desarrollo de proyectos</div>
+                <div class="timeline-company">Estudio Arq. Óscar González Moix, Lima</div>
+                <p>Gestión integral de proyectos, coordinación técnica y supervisión de obra, con metodologías de diseño paramétrico.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2009</div>
+                <div class="timeline-title">Proyectos en guadua</div>
+                <div class="timeline-company">Estudio Arq. José González, Lima</div>
+                <p>Diseño y desarrollo de estructuras en bambú (Guadua Angustifolia) y técnicas de construcción sostenible.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2008</div>
+                <div class="timeline-title">Desarrollador de proyectos · Prácticas</div>
+                <div class="timeline-company">De Col Arquitectos · Arquitectonica International, Lima</div>
+                <p>Proyectos residenciales y comerciales; documentación técnica, modelado 3D y apoyo en proyectos de gran envergadura.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contacto" class="section section--alt">
+    <div class="container">
+        <div class="section-head reveal">
+            <p class="eyebrow">04 — Contacto</p>
+            <h2 class="section-title">Conversemos</h2>
+        </div>
+        <div class="contact-grid reveal">
+            <div class="contact-item"><h4>Email</h4><p><a href="mailto:manolo.delabarra@gmail.com">manolo.delabarra@gmail.com</a></p></div>
+            <div class="contact-item"><h4>Teléfono</h4><p>+511 954 718 410</p></div>
+            <div class="contact-item"><h4>Ubicación</h4><p>Miraflores, Lima, Perú</p></div>
+            <div class="contact-item"><h4>Faceta artista</h4><p><a href="../artista/">Ver portafolio →</a></p></div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <p>Manu De la Barra — Arquitecto &amp; Docente</p>
+        <p>© 2026 · <a href="../">Inicio</a> · <a href="../artista/">Faceta artista</a></p>
+    </div>
+</footer>
+
+<script>
+    const navToggle=document.getElementById('navToggle');
+    const navList=document.getElementById('navList');
+    if(navToggle){
+        navToggle.addEventListener('click',()=>{const o=navList.classList.toggle('open');navToggle.setAttribute('aria-expanded',o);});
+        navList.querySelectorAll('a').forEach(l=>l.addEventListener('click',()=>{navList.classList.remove('open');navToggle.setAttribute('aria-expanded','false');}));
+    }
+    const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -60px 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+    const secs=document.querySelectorAll('section[id]');const links=document.querySelectorAll('.nav-link');
+    const nobs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id));}});},{rootMargin:'-40% 0px -55% 0px'});
+    secs.forEach(s=>nobs.observe(s));
+</script>
+</body>
+</html>

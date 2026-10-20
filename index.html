@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manu De la Barra</title>
+<meta name="description" content="Manu De la Barra — arquitecto, docente y artista digital. Lima, Perú.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Spectral:ital,wght@0,300;0,400;1,300&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{height:100%;}
+    body{
+        min-height:100%;
+        font-family:'Spectral',Georgia,serif;
+        background:#0c0e13;
+        color:#ede6d6;
+        overflow-x:hidden;
+    }
+    ::selection{background:#c68a3d;color:#0c0e13;}
+    a{color:inherit;text-decoration:none;}
+    :focus-visible{outline:2px solid #c68a3d;outline-offset:4px;}
+
+    .intro{
+        text-align:center;
+        padding:48px 24px 30px;
+    }
+    .intro .mono{
+        font-family:'IBM Plex Mono',monospace;
+        font-size:0.72rem;
+        letter-spacing:0.18em;
+        text-transform:uppercase;
+        color:#c68a3d;
+        margin-bottom:1.1rem;
+    }
+    .intro h1{
+        font-family:'Space Grotesk',sans-serif;
+        font-weight:600;
+        font-size:clamp(2.2rem,6vw,3.6rem);
+        letter-spacing:-0.01em;
+        line-height:1;
+        color:#ede6d6;
+    }
+    .intro p{
+        margin-top:1rem;
+        color:#8a8d95;
+        font-size:1rem;
+        font-style:italic;
+    }
+
+    .split{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        min-height:62vh;
+        border-top:1px solid rgba(237,230,214,0.1);
+    }
+    .panel{
+        position:relative;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        padding:56px 48px;
+        overflow:hidden;
+        transition:flex-basis 0.4s ease;
+        cursor:pointer;
+    }
+    .panel--arch{
+        background:#f4f2ec;
+        color:#1a1917;
+    }
+    .panel--art{
+        background:#0c0e13;
+        color:#ede6d6;
+        border-left:1px solid rgba(237,230,214,0.1);
+    }
+    .panel__weave{
+        position:absolute;inset:0;z-index:0;
+        opacity:0.6;
+        transition:opacity 0.4s ease;
+    }
+    .panel--arch .panel__weave{
+        background-image:
+            repeating-linear-gradient(90deg,rgba(26,25,23,0.06) 0 1px,transparent 1px 48px),
+            repeating-linear-gradient(0deg,rgba(26,25,23,0.06) 0 1px,transparent 1px 48px);
+    }
+    .panel--art .panel__weave{
+        background-image:
+            repeating-linear-gradient(90deg,rgba(198,138,61,0.1) 0 1px,transparent 1px 44px),
+            repeating-linear-gradient(0deg,rgba(198,138,61,0.1) 0 1px,transparent 1px 44px);
+    }
+    .panel:hover .panel__weave{opacity:1;}
+
+    .panel__content{position:relative;z-index:1;}
+    .panel__num{
+        font-family:'IBM Plex Mono',monospace;
+        font-size:0.72rem;
+        letter-spacing:0.14em;
+        margin-bottom:1.3rem;
+        opacity:0.7;
+    }
+    .panel--arch .panel__num{color:#8a7a5a;}
+    .panel--art .panel__num{color:#c68a3d;}
+
+    .panel h2{
+        font-family:'Space Grotesk',sans-serif;
+        font-weight:600;
+        font-size:clamp(1.7rem,3.4vw,2.6rem);
+        letter-spacing:-0.01em;
+        line-height:1.02;
+        margin-bottom:0.9rem;
+    }
+    .panel p{
+        font-size:0.98rem;
+        line-height:1.6;
+        max-width:360px;
+        margin-bottom:1.8rem;
+    }
+    .panel--arch p{color:#56514a;}
+    .panel--art p{color:#9a9c9f;}
+
+    .panel__tags{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2rem;}
+    .panel__tag{
+        font-family:'IBM Plex Mono',monospace;
+        font-size:0.72rem;
+        padding:0.35rem 0.7rem;
+    }
+    .panel--arch .panel__tag{border:1px solid #cfc9bd;color:#1a1917;}
+    .panel--art .panel__tag{border:1px solid rgba(237,230,214,0.14);color:#ede6d6;background:#15181f;}
+
+    .panel__enter{
+        font-family:'IBM Plex Mono',monospace;
+        font-size:0.8rem;
+        letter-spacing:0.04em;
+        display:inline-flex;
+        align-items:center;
+        gap:0.5rem;
+        width:fit-content;
+        padding-bottom:3px;
+        transition:gap 0.25s ease;
+    }
+    .panel--arch .panel__enter{border-bottom:1px solid #1a1917;}
+    .panel--art .panel__enter{border-bottom:1px solid #c68a3d;color:#c68a3d;}
+    .panel:hover .panel__enter{gap:0.8rem;}
+
+    .foot{
+        text-align:center;
+        padding:22px 24px 40px;
+        font-family:'IBM Plex Mono',monospace;
+        font-size:0.7rem;
+        letter-spacing:0.05em;
+        color:#6f7277;
+        border-top:1px solid rgba(237,230,214,0.1);
+    }
+    .foot a{border-bottom:1px solid rgba(237,230,214,0.2);}
+
+    @media (max-width:720px){
+        .split{grid-template-columns:1fr;min-height:0;}
+        .panel{padding:44px 28px;min-height:360px;}
+        .panel--art{border-left:none;border-top:1px solid rgba(237,230,214,0.1);}
+    }
+    @media (prefers-reduced-motion:reduce){
+        *{transition:none!important;}
+    }
+</style>
+</head>
+<body>
+    <div class="intro">
+        <div class="mono">Lima, Perú</div>
+        <h1>Manu De la Barra</h1>
+        <p>Dos prácticas, un mismo oficio: dar forma a sistemas.</p>
+    </div>
+
+    <main class="split">
+        <a class="panel panel--arch" href="arquitecto/">
+            <div class="panel__weave" aria-hidden="true"></div>
+            <div class="panel__content">
+                <div class="panel__num">01 — PRÁCTICA PROFESIONAL</div>
+                <h2>Arquitecto<br>&amp; Docente</h2>
+                <p>Arquitectura computacional, diseño paramétrico y generativo, visualización, y docencia de herramientas avanzadas para arquitectura.</p>
+                <div class="panel__tags">
+                    <span class="panel__tag">PARAMÉTRICO</span>
+                    <span class="panel__tag">ARCHVIZ</span>
+                    <span class="panel__tag">DOCENCIA</span>
+                    <span class="panel__tag">IA</span>
+                </div>
+                <span class="panel__enter">Entrar →</span>
+            </div>
+        </a>
+
+        <a class="panel panel--art" href="artista/">
+            <div class="panel__weave" aria-hidden="true"></div>
+            <div class="panel__content">
+                <div class="panel__num">02 — PRÁCTICA ARTÍSTICA</div>
+                <h2>Artista<br>Digital</h2>
+                <p>Obra generativa, instalaciones XR y realidad mixta, video arte y experimentación con IA en tiempo real.</p>
+                <div class="panel__tags">
+                    <span class="panel__tag">XR / MR</span>
+                    <span class="panel__tag">GENERATIVO</span>
+                    <span class="panel__tag">VIDEO ARTE</span>
+                    <span class="panel__tag">AI REALTIME</span>
+                </div>
+                <span class="panel__enter">Entrar →</span>
+            </div>
+        </a>
+    </main>
+
+    <div class="foot">
+        manolo.delabarra@gmail.com · Miraflores, Lima · <a href="https://www.artstation.com/manueldelabarra1" target="_blank" rel="noopener">ArtStation</a>
+    </div>
+</body>
+</html>
